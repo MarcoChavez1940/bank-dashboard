@@ -19,7 +19,6 @@ const loadData = async () => {
   return response;
 }
 
-
 const StatamentAccount = async () => {
   const transactionsData = await loadData();
   const transactions = transactionsData.reduce((group: any, transaction: any) => {
@@ -38,9 +37,9 @@ const StatamentAccount = async () => {
 
   return (
     <div>
-      {Object.keys(transactions).map((key, index) => {
+      {Object.keys(transactions).map((key) => {
         return (
-          <div key={index}>
+          <div key={key}>
             <h1>{key}</h1>
             <table className="table-auto">
               <thead>
