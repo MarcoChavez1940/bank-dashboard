@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 const loadData = async () => {
   let rawResponse = await fetch('https://sandbox.belvo.com/api/transactions/', {
     method: 'POST',
@@ -20,8 +22,51 @@ const loadData = async () => {
 }
 
 
-const StatamentAccount = async () => {
-  const transactionsData = await loadData();
+const StatamentAccount = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      let rawResponse = await fetch('https://sandbox.belvo.com/api/transactions/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa(`${process.env.NEXT_PUBLIC_SECRET_ID}:${process.env.NEXT_PUBLIC_SECRET_PASSWORD}`)
+        },
+        body: JSON.stringify(
+          {
+            "link": process.env.NEXT_PUBLIC_LINK_ID,
+            "date_from": "2023-09-01",
+            "date_to": "2023-09-29"
+          }
+        )
+      });
+      const response = await rawResponse.json();
+      console.log("data fetch")
+
+      const transactionsByCategory = response.reduce((group: any, transaction: any) => {
+        const { category } = transaction;
+        if (category !== null) {
+          group[category] = group[category] ?? [];
+          group[category].push(transaction);
+          return group;
+        } else {
+          group["Sin Categoria"] = group["Sin Categoria"] ?? [];
+          group["Sin Categoria"].push(transaction);
+          return group;
+        }
+
+      }, {});
+
+      setTransactions(transactionsByCategory);
+    };
+
+    loadData();
+  }, [])
+
+
+  /* const transactionsData = await loadData();
   const transactions = transactionsData.reduce((group: any, transaction: any) => {
     const { category } = transaction;
     if (category !== null) {
@@ -34,7 +79,7 @@ const StatamentAccount = async () => {
       return group;
     }
 
-  }, {});
+  }, {}); */
 
   return (
     <div>
