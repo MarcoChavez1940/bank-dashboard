@@ -19,6 +19,10 @@ const loadData = async () => {
   return response;
 }
 
+interface Person {
+  name: string;
+  country: string;
+}
 
 const StatamentAccount = async () => {
   const transactionsData = await loadData();
@@ -38,9 +42,9 @@ const StatamentAccount = async () => {
 
   return (
     <div>
-      {Object.keys(transactions).map((key, index) => {
+      {Object.keys(transactions).map((key) => {
         return (
-          <div key={index}>
+          <div key={key}>
             <h1>{key}</h1>
             <table className="table-auto">
               <thead>
