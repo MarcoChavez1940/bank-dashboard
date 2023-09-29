@@ -38,9 +38,9 @@ const StatamentAccount = async () => {
 
   return (
     <div>
-      {Object.keys(transactions).map((key) => {
+      {Object.keys(transactions).map((key, index) => {
         return (
-          <div>
+          <div key={index}>
             <h1>{key}</h1>
             <table className="table-auto">
               <thead>
