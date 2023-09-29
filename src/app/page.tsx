@@ -18,7 +18,7 @@ export default function Home() {
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a>
+        <a href='/statement-account'>
           <h2 className={`mb-3 text-2xl font-semibold`}>
             Estados de cuenta{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

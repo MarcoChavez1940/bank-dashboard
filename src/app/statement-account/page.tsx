@@ -19,11 +19,6 @@ const loadData = async () => {
   return response;
 }
 
-interface Person {
-  name: string;
-  country: string;
-}
-
 const StatamentAccount = async () => {
   const transactionsData = await loadData();
   const transactions = transactionsData.reduce((group: any, transaction: any) => {
