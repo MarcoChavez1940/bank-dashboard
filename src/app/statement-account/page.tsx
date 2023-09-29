@@ -9,7 +9,7 @@ const loadData = async () => {
     body: JSON.stringify(
       {
         "link": process.env.LINK_ID,
-        "date_from": "2023-09-01",
+        "date_from": "2023-07-01",
         "date_to": "2023-09-29"
       }
     )
